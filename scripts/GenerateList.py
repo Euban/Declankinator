@@ -3,6 +3,7 @@
 #duckduckgo.com,bing.com##a[href*="aibullshit.slop"]:upward(li):remove()
 #google.com##a[href*="aibullshit.slop"]:upward(2):remove()
 #*://*.aibullshit.slop/*
+#*://aibullshit.slop/*
 
 import os
 import argparse
@@ -17,11 +18,13 @@ def createList(URL, outputFile):
 
     DDGPattern = f'duckduckgo.com,bing.com##a[href*="{URL}"]:upward(li):remove()'
     GGLPattern = f'google.com##a[href*="{URL}"]:upward(2):remove()'
-    HTTPPattern = f'*://*.{URL}/*'
+    HTTPPattern1 = f'*://*.{URL}/*'
+    HTTPPattern2 = f'*://{URL}/*'
 
     outputFile.write(f'{DDGPattern}\n')
     outputFile.write(f'{GGLPattern}\n')
-    outputFile.write(f'{HTTPPattern}\n')
+    outputFile.write(f'{HTTPPattern1}\n')
+    outputFile.write(f'{HTTPPattern2}\n')
 def main():
     output = pathlib.Path(os.getcwd())
     #Simply get an arg for the directory of the videos
