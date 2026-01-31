@@ -1,4 +1,7 @@
 # uBlockOrigin & uBlacklist Huge AI Blocklist
+
+Fork of https://github.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist. Her goal is primary image/video. This fork is just me cobbling together some LLM generated sites. Can't get 100%, nor perhaps even 0.l% of the slop on the net, but I've noticed the same few sites over a couple months, so maybe there's merit to this...
+
 A huge blocklist of manually curated sites (1000+) that contain AI generated content, for the purposes of cleaning image search engines (Google Search, DuckDuckGo, and Bing) with uBlock Origin or uBlacklist. 
 
 Also works on mobile ([iOS, iPadOS,](#iOS-iPadOS-Safari-only) [Android](#Android-via-Firefox)) via uBlacklist, as well as pihole/adguard (via [Hosts file](#hosts-file-for-pi-holeadguard))
