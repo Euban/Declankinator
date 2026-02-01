@@ -46,7 +46,7 @@ def main():
             directory = pathlib.Path(args.txt)
             file = open(directory, 'r', encoding="UTF-8")
             for line in file:
-                createList(str(line).rstrip(), outputFile, block, black)
+                createList(str(line).rstrip(), block, black)
             file.close()
         else:
             print("Specify a .txt file of URLs with -t or a single URL with -s!")
