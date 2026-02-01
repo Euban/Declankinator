@@ -10,7 +10,7 @@ import argparse
 import pathlib
 import re
 
-def createList(URL, outputFile):
+def createList(URL, uBlockorig, uBlacklist):
     if URL.endswith("/"):
         URL = URL[:-1]
     #Remove http(s)://www.
@@ -21,31 +21,32 @@ def createList(URL, outputFile):
     HTTPPattern1 = f'*://*.{URL}/*'
     HTTPPattern2 = f'*://{URL}/*'
 
-    outputFile.write(f'{DDGPattern}\n')
-    outputFile.write(f'{GGLPattern}\n')
-    outputFile.write(f'{HTTPPattern1}\n')
-    outputFile.write(f'{HTTPPattern2}\n')
+    uBlockorig.write(f'{DDGPattern}\n')
+    uBlockorig.write(f'{GGLPattern}\n')
+    uBlockorig.write(f'{HTTPPattern2}\n')
+    uBlacklist.write(f'{HTTPPattern1}\n')
 def main():
     output = pathlib.Path(os.getcwd())
     #Simply get an arg for the directory of the videos
     parser = argparse.ArgumentParser()
     parser.add_argument('-txt', '-t', type=str, help="Path for a txt file with list of URLs, seperated by newlines, to create filters for")
-    parser.add_argument('-output', '-o', type=str, help="Enter output directory, will create/append to a 'output.txt'")
+    parser.add_argument('-output', '-o', type=str, help="Enter output directory")
     parser.add_argument('-single', '-s', type=str, help="Enter a domain name to create one filter for")
     args = parser.parse_args()
     if args.output:
         output = pathlib.Path(args.output)
-    output = output / "output.txt"
+    outputuBlockorig = output / "uBlockorig.txt"
+    outputuBlacklist = output / "uBlacklist.txt"
 
-    with open(output, 'a', encoding="UTF-8") as outputFile:
+    with open(outputuBlockorig, 'a', encoding="UTF-8") as block, open(outputuBlacklist, 'a', encoding="UTF-8") as black:
         if args.single:
             singleStr = args.single
-            createList(singleStr, outputFile)
+            createList(singleStr, block, black)
         elif args.txt:
             directory = pathlib.Path(args.txt)
             file = open(directory, 'r', encoding="UTF-8")
             for line in file:
-                createList(str(line).rstrip(), outputFile)
+                createList(str(line).rstrip(), outputFile, block, black)
             file.close()
         else:
             print("Specify a .txt file of URLs with -t or a single URL with -s!")
