@@ -1,8 +1,10 @@
-# uBlockOrigin & uBlacklist Huge AI Blocklist
+# uBlockOrigin & uBlacklist Huge AI Blocklist... As well as other low effort slop.
 
-Fork of [laylavish's repo](https://github.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist). Her goal is primary image/video. This fork is just me cobbling together some LLM generated sites. Can't get 100%, nor perhaps even 0.1% of the slop on the net, but I've noticed the same few sites over a couple months, so maybe there's merit to this...
+Fork of [laylavish's repo](https://github.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist). Her goal is primary image/video. This fork is just me cobbling together some LLM generated sites and merging from other uBlacklist lists, and converting them into a uBlock format as well. Can't get 100%, nor perhaps even 0.1% of the slop on the net, but I've noticed the same few sites over a couple months, so maybe there's merit to this...
 
-Also inherits sites from the AI-lists at [agsimmons/ai-content-blocklist](https://github.com/agsimmons/ai-content-blocklist) and [wdmpa/content-farm-list](https://github.com/wdmpa/content-farm-list)but using the handy script converts those links into ublock filters as well.
+Inherits sites from the AI/Human slop lists at [agsimmons/ai-content-blocklist](https://github.com/agsimmons/ai-content-blocklist) and [wdmpa/content-farm-list](https://github.com/wdmpa/content-farm-list), as well as slop from [popcar2/BadWebsiteBlocklist](https://github.com/popcar2/BadWebsiteBlocklist) but using the handy script converts those links into ublock filters as well.
+
+### Original Description
 
 A huge blocklist of manually curated sites (1000+) that contain AI generated content, for the purposes of cleaning image search engines (Google Search, DuckDuckGo, and Bing) with uBlock Origin or uBlacklist. 
 
