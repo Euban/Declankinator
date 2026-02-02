@@ -1,9 +1,12 @@
 #Take URL and make filterlist, for example:
 #aibullshit.slop = 
-#duckduckgo.com,bing.com##a[href*="aibullshit.slop"]:upward(li):remove()
-#google.com##a[href*="aibullshit.slop"]:upward(2):remove()
+# - uBLock Origin:
+#||aibullshit.slop^$document (Blocking results in search results is way less efficient than uBlacklist. It gets super slow, so for uBlock we just block the domain. Combine with uBlacklist to block search results AND the URL itself)
+# - uBlacklist:
 #*://*.aibullshit.slop/*
-#*://aibullshit.slop/*
+# - pi-hole/adguard:
+#0.0.0.0 aibullshit.slop
+#0.0.0.0 www.aibullshit.slop
 
 import os
 import argparse
