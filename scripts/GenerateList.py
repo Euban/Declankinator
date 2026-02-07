@@ -13,21 +13,21 @@ import argparse
 import pathlib
 import re
 
-def createList(URL, uBlockorig, uBlacklist):
+def createList(URL, uBlockorig, uBlacklist, pi):
     if URL.endswith("/"):
         URL = URL[:-1]
     #Remove http(s)://www.
     URL = re.sub("(https?:\/\/)(\s)*(www\.)?(\s)*", '', URL)
 
-    DDGPattern = f'duckduckgo.com,bing.com##a[href*="{URL}"]:upward(li):remove()'
-    GGLPattern = f'google.com##a[href*="{URL}"]:upward(2):remove()'
-    HTTPPattern1 = f'*://*.{URL}/*'
-    HTTPPattern2 = f'*://{URL}/*'
+    uBlockpattern = f'||{URL}^$document'
+    uBLacklistpattern = f'*://*.{URL}/*'
+    pihole1 = f'0.0.0.0 {URL}'
+    pihole2 = f'0.0.0.0 www.{URL}'
 
-    uBlockorig.write(f'{DDGPattern}\n')
-    uBlockorig.write(f'{GGLPattern}\n')
-    uBlockorig.write(f'{HTTPPattern2}\n')
-    uBlacklist.write(f'{HTTPPattern1}\n')
+    uBlockorig.write(f'{uBlockpattern}\n')
+    uBlacklist.write(f'{uBLacklistpattern}\n')
+    pi.write(f'{pihole1}\n{pihole2}\n')
+
 def main():
     output = pathlib.Path(os.getcwd())
     #Simply get an arg for the directory of the videos
@@ -40,16 +40,17 @@ def main():
         output = pathlib.Path(args.output)
     outputuBlockorig = output / "uBlockorig.txt"
     outputuBlacklist = output / "uBlacklist.txt"
+    outputpihole = output / "pihole.txt"
 
-    with open(outputuBlockorig, 'a', encoding="UTF-8") as block, open(outputuBlacklist, 'a', encoding="UTF-8") as black:
+    with open(outputuBlockorig, 'a', encoding="UTF-8") as block, open(outputuBlacklist, 'a', encoding="UTF-8") as black, open (outputpihole, 'a', encoding="UTF-8") as pi:
         if args.single:
             singleStr = args.single
-            createList(singleStr, block, black)
+            createList(singleStr, block, black, pi)
         elif args.txt:
             directory = pathlib.Path(args.txt)
             file = open(directory, 'r', encoding="UTF-8")
             for line in file:
-                createList(str(line).rstrip(), block, black)
+                createList(str(line).strip(), block, black, pi)
             file.close()
         else:
             print("Specify a .txt file of URLs with -t or a single URL with -s!")
